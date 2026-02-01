@@ -1,4 +1,4 @@
- import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { ExternalLink, Github, Code, Database, Brain, TrendingUp, Filter, X, ChevronRight, CheckCircle, Activity } from 'lucide-react';
 
 const ProjectsPage = () => {
@@ -32,11 +32,11 @@ const ProjectsPage = () => {
       techStack: ["Python", "Scikit-learn", "NumPy", "Pandas", "FastAPI", "Streamlit"],
       deployment: {
         method: "Streamlit Cloud with FastAPI backend",
-        url: "https://game.harshgiri.site",
+        url: "https://game-recommeder.vercel.app",
         infrastructure: "RESTful API, caching layer, asynchronous processing"
       },
-      github: "https://github.com/giri-harsh",
-      demo: "https://game.harshgiri.site",
+      github: "https://github.com/giri-harsh/Game-Recommendation-System",
+      demo: "https://game-recommeder.vercel.app",
       highlights: [
         "Sub-35ms latency for real-time recommendations",
         "Scalable architecture handling 1K+ daily requests",
@@ -70,11 +70,11 @@ const ProjectsPage = () => {
       techStack: ["Python", "Scikit-learn", "Pandas", "SHAP", "SMOTE", "Streamlit"],
       deployment: {
         method: "Streamlit interactive application",
-        url: "https://loan.harshgiri.site",
+        url: "https://loan-approval-harsh-giri.streamlit.app",
         infrastructure: "Real-time prediction API with explainability dashboard"
       },
-      github: "https://github.com/giri-harsh",
-      demo: "https://loan.harshgiri.site",
+      github: "https://github.com/giri-harsh/Loan-Prediction",
+      demo: "https://loan-approval-harsh-giri.streamlit.app",
       highlights: [
         "SHAP explainability for regulatory compliance",
         "21% recall improvement with SMOTE",
@@ -111,7 +111,7 @@ const ProjectsPage = () => {
         url: null,
         infrastructure: "Model checkpoints and evaluation frameworks ready for production"
       },
-      github: "https://github.com/giri-harsh",
+      github: "https://github.com/giri-harsh/AI-Disease-Prediction",
       demo: null,
       highlights: [
         "11.7% accuracy improvement through feature engineering",
@@ -149,7 +149,7 @@ const ProjectsPage = () => {
         url: null,
         infrastructure: "Modular analysis scripts and interactive notebooks"
       },
-      github: "https://github.com/giri-harsh/python-programs",
+      github: "https://github.com/giri-harsh/Python-ML-projects",
       demo: null,
       highlights: [
         "25+ analytical programs across domains",
