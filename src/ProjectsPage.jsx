@@ -157,6 +157,82 @@ const ProjectsPage = () => {
         "Statistical modeling and hypothesis testing",
         "Reusable data pipelines and modules"
       ]
+    },
+    {
+      id: 5,
+      title: "Yap-Doc — Conversational RAG PDF Assistant",
+      category: "genai",
+      status: "production",
+      shortDesc: "RAG-powered chatbot that turns PDFs into interactive conversations using vector search and LLMs",
+      problem: "Reading and extracting insights from long PDFs is slow and error-prone. Users need a way to query documents conversationally instead of manually searching through pages.",
+      dataset: {
+        name: "User-Uploaded PDF Corpus",
+        size: "Arbitrary documents up to 200+ pages per session",
+        source: "Dynamically ingested PDFs, chunked and embedded at upload time"
+      },
+      approach: {
+        algorithm: "Retrieval-Augmented Generation (RAG) with FAISS vector search",
+        features: "Local sentence-transformer embeddings, semantic chunking, top-k similarity retrieval, prompt-grounded generation",
+        optimization: "Local embedding inference to avoid per-query API cost, chunk-embedding cache, streamed token responses"
+      },
+      results: {
+        accuracy: "~92% answer relevance on internal QA spot-checks",
+        performance: "~1.2s average end-to-end response latency",
+        scale: "Tested with 50+ page PDFs without context loss",
+        impact: "Cuts document research time from minutes to seconds"
+      },
+      techStack: ["Python", "FastAPI", "FAISS", "Sentence-Transformers", "Groq", "Google Gemini", "JavaScript"],
+      deployment: {
+        method: "FastAPI backend with a custom HTML/CSS/JS frontend, deployed on Render",
+        url: "https://yap-doc.harshgiri.site/",
+        infrastructure: "REST API, persistent vector store, dual LLM provider fallback (Groq + Gemini)"
+      },
+      github: "https://github.com/giri-harsh/yap-doc",
+      demo: "https://yap-doc.harshgiri.site/",
+      highlights: [
+        "Dual LLM provider support (Groq + Gemini) for redundancy",
+        "Local sentence-transformer embeddings — no per-query embedding API cost",
+        "Custom glassmorphic chat UI with animated waveform indicator",
+        "Sub-2s average query response time"
+      ]
+    },
+    {
+      id: 6,
+      title: "Food Vision AI — Real-Time Nutrition Recognition",
+      category: "genai",
+      status: "production",
+      shortDesc: "Image-based food classifier that estimates dish identity and nutritional content in real time",
+      problem: "Manually logging meals and estimating calorie content is tedious and discourages consistent nutrition tracking. Users need instant nutritional feedback from a single photo.",
+      dataset: {
+        name: "Food Image Classification Dataset",
+        size: "100+ food classes, thousands of labeled images",
+        source: "Public food-image datasets augmented with a nutrition label mapping table"
+      },
+      approach: {
+        algorithm: "Convolutional Neural Network (CNN) image classifier with transfer learning",
+        features: "Pretrained vision backbone fine-tuned on food categories, per-class nutrition lookup table",
+        optimization: "Image preprocessing pipeline, model quantization for faster inference, portion-size calorie heuristics"
+      },
+      results: {
+        accuracy: "~88% top-1 classification accuracy",
+        performance: "<500ms inference per image",
+        scale: "Recognizes 100+ distinct dishes",
+        impact: "Instant nutrition estimates from a single photo, no manual logging"
+      },
+      techStack: ["Python", "TensorFlow", "Keras", "FastAPI", "OpenCV", "JavaScript"],
+      deployment: {
+        method: "FastAPI inference backend with a web frontend, deployed on Render",
+        url: "https://food.harshgiri.site/",
+        infrastructure: "Image upload endpoint, CNN inference pipeline, nutrition lookup service"
+      },
+      github: "https://github.com/giri-harsh/food-vision-ai",
+      demo: "https://food.harshgiri.site/",
+      highlights: [
+        "88% top-1 classification accuracy across 100+ food classes",
+        "Sub-500ms inference per image",
+        "Real-time calorie estimation from a single photo",
+        "Lightweight model optimized for fast web inference"
+      ]
     }
   ];
 
@@ -165,7 +241,8 @@ const ProjectsPage = () => {
     { id: 'production', label: 'Production', count: projects.filter(p => p.status === 'production').length },
     { id: 'recommendation', label: 'Recommendation', count: projects.filter(p => p.category === 'recommendation').length },
     { id: 'predictive', label: 'Predictive', count: projects.filter(p => p.category === 'predictive').length },
-    { id: 'analytics', label: 'Analytics', count: projects.filter(p => p.category === 'analytics').length }
+    { id: 'analytics', label: 'Analytics', count: projects.filter(p => p.category === 'analytics').length },
+    { id: 'genai', label: 'GenAI / LLM', count: projects.filter(p => p.category === 'genai').length }
   ];
 
   const filteredProjects = selectedFilter === 'all' 
@@ -174,50 +251,52 @@ const ProjectsPage = () => {
 
   return (
     <div className="bg-slate-950 text-slate-100 min-h-screen">
-      {/* Header */}
-      <header className="bg-slate-900 border-b border-slate-800 sticky top-0 z-40 backdrop-blur-sm bg-slate-900/95">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
-            <div>
-              <h1 className="text-2xl font-bold">Project Portfolio</h1>
-              <p className="text-slate-400 text-sm">End-to-end ML systems from research to production</p>
-            </div>
-            <a 
-              href="https://harshgiri.site"
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg transition-colors flex items-center gap-2"
-            >
-              Back to Portfolio
-              <ChevronRight size={16} />
-            </a>
-          </div>
-        </div>
-      </header>
-
-      {/* Filters */}
-      <div className="bg-slate-900/50 border-b border-slate-800 sticky top-[73px] z-30 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center gap-3 overflow-x-auto">
-            <Filter size={20} className="text-slate-400 flex-shrink-0" />
-            {filters.map(filter => (
-              <button
-                key={filter.id}
-                onClick={() => setSelectedFilter(filter.id)}
-                className={`px-4 py-2 rounded-lg font-medium transition-all whitespace-nowrap ${
-                  selectedFilter === filter.id
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
-                }`}
+      {/* Sticky header + filter bar — grouped so filter offset never depends on header height */}
+      <div className="sticky top-0 z-40">
+        <header className="bg-slate-900 border-b border-slate-800 backdrop-blur-sm bg-slate-900/95">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+              <div>
+                <h1 className="text-xl sm:text-2xl font-bold">Project Portfolio</h1>
+                <p className="text-slate-400 text-sm">End-to-end ML systems from research to production</p>
+              </div>
+              <a
+                href="https://harshgiri.site"
+                className="self-start sm:self-auto px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg transition-colors flex items-center gap-2 text-sm sm:text-base"
               >
-                {filter.label}
-                <span className="ml-2 text-xs opacity-70">({filter.count})</span>
-              </button>
-            ))}
+                Back to Portfolio
+                <ChevronRight size={16} />
+              </a>
+            </div>
+          </div>
+        </header>
+
+        {/* Filters */}
+        <div className="bg-slate-900/50 border-b border-slate-800 backdrop-blur-sm">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+            <div className="flex items-center gap-3 overflow-x-auto">
+              <Filter size={20} className="text-slate-400 flex-shrink-0" />
+              {filters.map(filter => (
+                <button
+                  key={filter.id}
+                  onClick={() => setSelectedFilter(filter.id)}
+                  className={`px-4 py-2 rounded-lg font-medium transition-all whitespace-nowrap ${
+                    selectedFilter === filter.id
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                  }`}
+                >
+                  {filter.label}
+                  <span className="ml-2 text-xs opacity-70">({filter.count})</span>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
       {/* Projects Grid */}
-      <div className="max-w-7xl mx-auto px-6 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
         <div className="grid md:grid-cols-2 gap-6">
           {filteredProjects.map(project => (
             <div
@@ -304,12 +383,12 @@ const ProjectsPage = () => {
 
       {/* Project Detail Modal */}
       {selectedProject && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-6 overflow-y-auto">
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
           <div className="bg-slate-900 rounded-2xl max-w-4xl w-full border border-slate-700 max-h-[90vh] overflow-y-auto">
-            <div className="sticky top-0 bg-slate-900 border-b border-slate-800 p-6 flex justify-between items-start z-10">
+            <div className="sticky top-0 bg-slate-900 border-b border-slate-800 p-4 sm:p-6 flex justify-between items-start z-10">
               <div>
-                <h2 className="text-2xl font-bold mb-2">{selectedProject.title}</h2>
-                <div className="flex gap-2">
+                <h2 className="text-xl sm:text-2xl font-bold mb-2">{selectedProject.title}</h2>
+                <div className="flex flex-wrap gap-2">
                   {selectedProject.status === 'production' && (
                     <span className="inline-flex items-center gap-1 px-3 py-1 bg-green-500/20 text-green-400 text-sm rounded-full">
                       <Activity size={14} />
@@ -323,13 +402,13 @@ const ProjectsPage = () => {
               </div>
               <button
                 onClick={() => setSelectedProject(null)}
-                className="p-2 hover:bg-slate-800 rounded-lg transition-colors"
+                className="p-2 hover:bg-slate-800 rounded-lg transition-colors flex-shrink-0"
               >
                 <X size={24} />
               </button>
             </div>
 
-            <div className="p-6 space-y-8">
+            <div className="p-4 sm:p-6 space-y-8">
               {/* Problem Statement */}
               <div>
                 <h3 className="text-xl font-bold mb-3 flex items-center gap-2">
