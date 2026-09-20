@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Projects — Harsh Giri</title>
+<meta name="description" content="Every system Harsh Giri has shipped — agentic AI, RAG, ML and open source, with the numbers." />
+<meta name="author" content="Harsh Giri" />
+<meta name="theme-color" content="#F1ECE3" />
+<link rel="canonical" href="https://project.harshgiri.site/" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://project.harshgiri.site/" />
+<meta property="og:title" content="Projects — Harsh Giri" />
+<meta property="og:description" content="Agentic AI, RAG, ML and open source — every project with its stack, numbers and case study." />
+<meta property="og:image" content="https://project.harshgiri.site/og.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="preload" href="/ds/v1/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/ds/v1/fonts.css" />
+<link rel="stylesheet" href="/ds/v1/hg.css" />
+<script src="/ds/v1/core.js"></script>
+<script src="projects.js"></script>
+<style>
+/* hero */
+.phero { padding: 22vh var(--g) 8vh; }
+.phero h1 { margin: 0; font-size: clamp(68px, 12vw, 200px); }
+.phero .sub { margin: 26px 0 0; max-width: 44ch; font: 300 clamp(20px, 1.9vw, 28px)/1.3 var(--sans); font-variation-settings: "wdth" 108; letter-spacing: -.01em; }
+.phero .sub b { font-weight: 700; }
+.stats { display: grid; grid-template-columns: repeat(4, auto); justify-content: start; gap: 18px 56px; margin-top: 7vh; }
+.stats b { display: block; font: 800 clamp(44px, 5vw, 80px)/.85 var(--sans); font-variation-settings: "wdth" 75; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.stats span { color: var(--mid); display: block; margin-top: 8px; }
+@media (max-width: 700px) { .stats { grid-template-columns: repeat(2, auto); } }
+
+/* featured banner */
+.feature { margin: 0 var(--g); border-radius: 30px; background: #121211; color: #F1ECE3; padding: clamp(24px, 4vw, 56px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 4vw; position: relative; overflow: hidden; }
+.feature .cap.k { color: #F1ECE399; }
+.feature h2 { margin: 18px 0 0; font-size: clamp(52px, 6.4vw, 108px); }
+.feature p { margin: 18px 0 0; font: 700 clamp(18px, 1.5vw, 23px)/1.35 var(--sans); max-width: 30ch; }
+.feature .go { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 28px; }
+.feature .btn:hover { background: #F1ECE3; color: #121211; border-color: #F1ECE3; }
+.feature .kp { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; border-top: 1px solid #F1ECE326; border-bottom: 1px solid #F1ECE326; padding: 16px 0; margin-bottom: 22px; }
+.feature .kp b { display: block; font: 800 30px/1 var(--sans); font-variation-settings: "wdth" 78; color: #B8FF3C; }
+.feature .kp span { display: block; margin-top: 6px; font: 500 10px/1.3 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: #F1ECE399; }
+.feature .flow2 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.feature .flow2 div { border: 1px solid #F1ECE333; border-radius: 12px; padding: 10px; font: 500 11px/1.3 var(--mono); color: #F1ECE3CC; transition: background .3s, color .3s, border-color .3s; }
+.feature .flow2 div b { display: block; font: 600 10px var(--mono); color: #F1ECE366; margin-bottom: 4px; }
+.feature .flow2 div.lit { background: #B8FF3C; color: #121211; border-color: #B8FF3C; } .feature .flow2 div.lit b { color: #12121199; }
+.feature .glow { position: absolute; right: -12vw; top: -20vw; width: 44vw; height: 44vw; border-radius: 50%; background: radial-gradient(closest-side, #B8FF3C2E, transparent 70%); pointer-events: none; }
+.feature > * { min-width: 0; }
+@media (max-width: 980px) { .feature { grid-template-columns: minmax(0, 1fr); margin: 0 14px; } .feature .kp, .feature .flow2 { grid-template-columns: repeat(2, 1fr); } }
+
+/* controls */
+.controls { position: sticky; top: 76px; z-index: 20; padding: 14px var(--g); margin-top: 12vh; }
+.controls .bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; background: color-mix(in srgb, var(--card) 86%, transparent); backdrop-filter: blur(12px); border: 1px solid var(--line); border-radius: 22px; padding: 10px; max-width: 1240px; margin: 0 auto; }
+.filters { display: flex; flex-wrap: wrap; gap: 6px; }
+.filters button { border: 1px solid var(--line); background: var(--bg); border-radius: 999px; padding: 8px 12px; min-height: 38px; font: 600 11px var(--mono); letter-spacing: .12em; text-transform: uppercase; cursor: pointer; display: inline-flex; gap: 6px; align-items: center; transition: background .2s, color .2s, border-color .2s; }
+.filters button sup { font: 500 10px var(--mono); opacity: .6; }
+.filters button:hover { border-color: var(--fg); }
+.filters button[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.tools2 { display: flex; gap: 8px; align-items: center; }
+.srch { display: flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 999px; padding: 0 14px; background: var(--bg); min-height: 38px; }
+.srch .dd { width: 18px; height: 18px; color: var(--mid); }
+.srch input { border: 0; background: none; outline: none; font: 400 14px var(--mono); color: var(--fg); width: 180px; }
+.vt { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
+.vt button { border: 0; background: none; padding: 0 12px; min-height: 38px; cursor: pointer; display: grid; place-items: center; }
+.vt button .dd { width: 18px; height: 18px; }
+.vt button[aria-pressed="true"] { background: var(--acc); color: var(--on-acc); }
+@media (max-width: 700px) { .controls { top: 64px; padding: 10px 12px; } .srch input { width: 120px; } .filters { overflow-x: auto; flex-wrap: nowrap; width: 100%; scrollbar-width: none; } }
+
+/* list view (index) */
+.list { padding: 30px var(--g) 18vh; }
+.count { color: var(--mid); margin: 6px 0 16px; }
+.rows .th, .rows .row { display: grid; grid-template-columns: 62px 1.3fr 1.4fr 1fr 150px 40px; align-items: center; gap: 14px; }
+.rows .th { padding: 0 12px 10px; border-bottom: 1.5px solid var(--fg); color: var(--mid); }
+.rows .row { width: 100%; text-align: left; background: none; border: 0; border-bottom: 1px solid var(--line); padding: 22px 12px; cursor: pointer; font: inherit; color: inherit; transition: background .25s, padding .3s var(--ease); position: relative; }
+.rows .row:hover, .rows .row:focus-visible { background: var(--acc); color: var(--on-acc); outline: none; padding-left: 22px; }
+.rows .row:hover .m, .rows .row:focus-visible .m { color: inherit; opacity: .75; }
+.row .t { font: 800 clamp(22px, 2.3vw, 34px)/1.05 var(--sans); font-variation-settings: "wdth" 86; letter-spacing: -.015em; text-transform: uppercase; }
+.row .m { color: var(--mid); font-size: 14px; }
+.row .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.row .tags span { font: 600 10px var(--mono); letter-spacing: .12em; text-transform: uppercase; border: 1px solid currentColor; border-radius: 999px; padding: 3px 8px; opacity: .7; }
+.row .k { text-align: right; font: 800 clamp(22px, 2.3vw, 34px)/1 var(--sans); font-variation-settings: "wdth" 72; }
+.row .k small { display: block; font: 500 10px var(--mono); letter-spacing: .12em; text-transform: uppercase; opacity: .6; margin-top: 4px; }
+.row .ar .dd { width: 22px; height: 22px; transition: transform .35s var(--pop); } .row:hover .ar .dd { transform: rotate(45deg) scale(1.2); }
+.row .badge { margin-left: 10px; vertical-align: middle; font-size: 9.5px; padding: 3px 8px; }
+@media (max-width: 900px) { .rows .th { display: none; } .rows .row { grid-template-columns: 40px 1fr auto; } .row .m, .row .tags, .row .ar { display: none; } }
+
+/* grid view */
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 1000px) { .cards { grid-template-columns: repeat(2, 1fr); } } @media (max-width: 620px) { .cards { grid-template-columns: 1fr; } }
+.card { text-align: left; font: inherit; color: inherit; cursor: pointer; border: 1.5px solid var(--fg); background: var(--card); border-radius: 22px; padding: 22px; display: grid; gap: 12px; align-content: start; min-height: 290px; transition: transform .35s var(--pop), box-shadow .3s, background .3s; }
+.card:hover, .card:focus-visible { transform: translate(-4px, -5px) rotate(-.6deg); box-shadow: 6px 7px 0 var(--fg); outline: none; }
+.card:nth-child(4n+1):hover { background: var(--acc); color: var(--on-acc); }
+.card .hd { display: flex; justify-content: space-between; align-items: center; color: var(--mid); }
+.card b.k { font: 800 clamp(44px, 4vw, 64px)/.85 var(--sans); font-variation-settings: "wdth" 72; letter-spacing: -.03em; }
+.card .kl { color: var(--mid); margin-top: -4px; }
+.card h3 { margin: 8px 0 0; font: 800 26px/1 var(--sans); font-variation-settings: "wdth" 86; text-transform: uppercase; letter-spacing: -.01em; }
+.card p { margin: 0; color: var(--mid); font-size: 14.5px; line-height: 1.5; }
+.hidden { display: none !important; }
+.empty { padding: 60px 0; text-align: center; color: var(--mid); }
+
+/* case-study drawer */
+.scrim { position: fixed; inset: 0; background: #12121166; backdrop-filter: blur(3px); z-index: 70; opacity: 0; pointer-events: none; transition: opacity .35s; }
+.scrim.on { opacity: 1; pointer-events: auto; }
+.drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(760px, 100vw); z-index: 80; background: var(--bg); border-left: 1.5px solid var(--fg); transform: translateX(102%); transition: transform .55s var(--ease); display: flex; flex-direction: column; }
+.drawer.on { transform: none; }
+.dh { display: flex; justify-content: space-between; align-items: center; padding: 16px 22px; border-bottom: 1px solid var(--line); gap: 10px; }
+.dh .nav2 { display: flex; gap: 6px; }
+.ib { width: 42px; height: 42px; border-radius: 50%; border: 1.5px solid var(--fg); background: var(--card); display: grid; place-items: center; cursor: pointer; transition: background .2s, transform .3s var(--pop); }
+.ib:hover { background: var(--acc); transform: scale(1.08); } .ib .dd { width: 18px; height: 18px; }
+.db { overflow-y: auto; padding: 30px clamp(18px, 4vw, 44px) 60px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 30px; overscroll-behavior: contain; }
+.db > * { min-width: 0; }
+.db .top3 { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; color: var(--mid); }
+.db h2 { margin: 12px 0 0; font-size: clamp(46px, 6vw, 84px); }
+.db .sub2 { margin: 10px 0 0; color: var(--mid); font: 500 13px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+.db .lede { margin: 18px 0 0; font: 700 clamp(20px, 2vw, 26px)/1.3 var(--sans); letter-spacing: -.01em; }
+.db h4 { margin: 0 0 12px; color: var(--mid); }
+.db .kp { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; }
+.db .kp div { border: 1.5px solid var(--fg); border-radius: 16px; padding: 14px; background: var(--card); }
+.db .kp div:first-child { background: var(--acc); color: var(--on-acc); border-color: var(--acc); }
+.db .kp b { display: block; font: 800 32px/1 var(--sans); font-variation-settings: "wdth" 76; }
+.db .kp span { display: block; margin-top: 6px; font: 500 10.5px/1.3 var(--mono); letter-spacing: .1em; text-transform: uppercase; opacity: .7; }
+.db .prob { margin: 0; font-size: 17px; line-height: 1.6; }
+.db ol.ap { margin: 0; padding: 0; list-style: none; counter-reset: a; display: grid; gap: 12px; }
+.db ol.ap li { counter-increment: a; display: grid; grid-template-columns: 34px 1fr; gap: 10px; font-size: 16px; line-height: 1.55; }
+.db ol.ap li::before { content: counter(a, decimal-leading-zero); font: 600 11px var(--mono); color: var(--mid); padding-top: 4px; }
+.db .go { display: flex; gap: 10px; flex-wrap: wrap; }
+.db .none { color: var(--mid); font: 400 13px var(--mono); }
+
+/* footer */
+.pfoot { padding: 12vh var(--g) 40px; border-top: 1px solid var(--line); }
+.pfoot h2 { margin: 0; font-size: clamp(48px, 8vw, 140px); }
+.pfoot .row3 { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; color: var(--mid); margin-top: 6vh; }
+.pfoot .row3 div { display: flex; gap: 18px; flex-wrap: wrap; } .pfoot a:hover { color: var(--fg); }
+</style>
+</head>
+<body>
+<main id="app"></main>
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="dtitle" aria-hidden="true" tabindex="-1" inert>
+  <div class="dh"><span class="cap" id="dpos" style="color:var(--mid)"></span><div class="nav2"><button class="ib" id="dprev" type="button" aria-label="Previous project"></button><button class="ib" id="dnext" type="button" aria-label="Next project"></button><button class="ib" id="dclose" type="button" aria-label="Close"></button></div></div>
+  <div class="db" id="dbody"></div>
+</aside>
+
+<script src="/vendor/gsap.min.js"></script>
+<script src="/vendor/ScrollTrigger.min.js"></script>
+<script src="/vendor/SplitText.min.js"></script>
+<script src="/ds/v1/hg.js"></script>
+<script>
+const { dd, esc: e, $, $$ } = HG, C = window.CONTENT, P = window.PROJECTS, RM = window.RM;
+const HOME = C.sites.home;
+HG.chrome({ nav: [["Home", HOME], ["Projects", "#"], ["Résumé", C.sites.resume], ["Contact", HOME + "/#contact"]], active: "Projects", email: C.email });
+
+const live = P.filter((p) => p.live).length, fin = P.filter((p) => p.badge && p.badge[1] === "Finalist").length;
+const erag = P[0];
+const catName = Object.fromEntries(CATS);
+
+$("#app").innerHTML = `
+<section class="phero"><div class="wrap">
+  <div class="lbl cap">project.harshgiri.site</div>
+  <h1 class="big">Every system,<br><span class="hl">shipped.</span></h1>
+  <p class="sub">Agentic AI, RAG, ML and open source — <b>every number</b> comes from production, evaluation or the judges' table.</p>
+  <div class="stats">
+    <div><b data-n="${P.length}">${P.length}</b><span class="cap">projects</span></div>
+    <div><b data-n="${live}">${live}</b><span class="cap">live in production</span></div>
+    <div><b data-n="${fin}">${fin}</b><span class="cap">hackathon finals</span></div>
+    <div><b>&lt;35 ms</b><span class="cap">fastest query</span></div>
+  </div>
+</div></section>
+
+<section class="feature" data-tone="ink">
+  <div class="glow"></div>
+  <div>
+    <span class="cap k">Featured · flagship system</span>
+    <h2 class="big fit">${e(erag.t)}</h2>
+    <p>${e(erag.lede)}</p>
+    <div class="go"><button class="btn hot" type="button" data-open="erag">Read the case study ${dd("arrow")}</button><a class="btn" href="${erag.gh}" target="_blank" rel="noopener">Source ${dd("git")}</a></div>
+  </div>
+  <div>
+    <div class="kp">${erag.kpi.map(([v, l]) => `<div><b>${e(v)}</b><span>${e(l)}</span></div>`).join("")}</div>
+    <div class="flow2" id="flow2">${erag.pipe.map((x, i) => `<div><b>0${i + 1}</b>${e(x)}</div>`).join("")}</div>
+  </div>
+</section>
+
+<div class="controls"><div class="bar">
+  <div class="filters" id="filters" role="group" aria-label="Filter projects">${CATS.map(([k, t]) => `<button type="button" data-cat="${k}" aria-pressed="${k === "all"}">${t}<sup>${k === "all" ? P.length : P.filter((p) => p.cat.includes(k)).length}</sup></button>`).join("")}</div>
+  <div class="tools2">
+    <label class="srch">${dd("search")}<input id="q" type="search" placeholder="Search stack, metric…" aria-label="Search projects" /></label>
+    <div class="vt" role="group" aria-label="View"><button type="button" data-v="list" aria-pressed="true" aria-label="Index view">${dd("list")}</button><button type="button" data-v="grid" aria-pressed="false" aria-label="Grid view">${dd("grid")}</button></div>
+  </div>
+</div></div>
+
+<section class="list"><div class="wrap" style="padding-left:0">
+  <div class="count cap" id="count"></div>
+  <div class="rows" id="rows">
+    <div class="th cap"><div>No.</div><div>Project</div><div>What it is</div><div>Tags</div><div style="text-align:right">Key figure</div><div></div></div>
+    ${P.map((p, i) => `<button class="row" type="button" data-id="${p.id}"><span class="cap">${String(i + 1).padStart(2, "0")}</span><span class="t">${e(p.t)}${p.badge ? `<em class="badge ${p.badge[0]}" style="font-style:normal">${e(p.badge[1])}</em>` : ""}</span><span class="m">${e(p.sub)}</span><span class="tags">${p.cat.slice(0, 3).map((c) => `<span>${catName[c]}</span>`).join("")}</span><span class="k">${e(p.key)}<small>${e(p.keyL)}</small></span><span class="ar">${dd("arrow")}</span></button>`).join("")}
+  </div>
+  <div class="cards hidden" id="cards">${P.map((p, i) => `<button class="card" type="button" data-id="${p.id}"><div class="hd"><span class="cap">${String(i + 1).padStart(2, "0")} · ${e(p.cat.map((c) => catName[c]).slice(0, 2).join(" · "))}</span>${p.badge ? `<em class="badge ${p.badge[0]}" style="font-style:normal">${e(p.badge[1])}</em>` : ""}</div><b class="k">${e(p.key)}</b><span class="kl cap">${e(p.keyL)}</span><h3>${e(p.t)}</h3><p>${e(p.lede)}</p></button>`).join("")}</div>
+  <div class="empty hidden" id="empty">No projects match. <button class="btn" type="button" id="reset">Reset filters</button></div>
+</div></section>
+
+<footer class="pfoot"><div class="wrap">
+  <div class="lbl cap">Contact</div>
+  <h2 class="big">Want the <span class="hl">deep dive?</span></h2>
+  <p style="margin:24px 0 0;font:700 clamp(22px,2.4vw,36px)/1.2 var(--sans)"><a href="mailto:${C.email}" style="background:linear-gradient(var(--acc),var(--acc)) no-repeat 0 92% / 100% 26%">${C.email}</a></p>
+  <div class="row3 cap"><span>© Harsh Giri · ${e(C.location)}</span><div><a href="${HOME}">harshgiri.site</a><a href="${C.sites.resume}">resume</a><a href="#">projects</a></div></div>
+</div></footer>`;
+
+/* filtering + search + view */
+let cat = "all", q = "", view = "list";
+const text = (p) => [p.t, p.sub, p.lede, p.problem || "", ...(p.approach || []), ...(p.stack || []), ...(p.kpi || []).flat(), p.event || ""].join(" ").toLowerCase();
+const IDX = Object.fromEntries(P.map((p) => [p.id, text(p)]));
+function apply() {
+  const vis = P.filter((p) => (cat === "all" || p.cat.includes(cat)) && (!q || q.split(/\s+/).every((w) => IDX[p.id].includes(w))));
+  const ids = new Set(vis.map((p) => p.id));
+  $$("[data-id]").forEach((el) => el.classList.toggle("hidden", !ids.has(el.dataset.id)));
+  $("#count").textContent = `${vis.length} of ${P.length} projects${cat !== "all" ? " · " + catName[cat] : ""}${q ? ` · “${q}”` : ""}`;
+  $("#empty").classList.toggle("hidden", vis.length > 0);
+  if (window.gsap && !RM) gsap.fromTo(view === "list" ? $$("#rows .row:not(.hidden)") : $$("#cards .card:not(.hidden)"), { y: 16, opacity: 0 }, { y: 0, opacity: 1, stagger: .025, duration: .45, ease: "expo.out", overwrite: true });
+  return vis;
+}
+$("#filters").addEventListener("click", (ev) => { const b = ev.target.closest("button"); if (!b) return; cat = b.dataset.cat; $$("#filters button").forEach((x) => x.setAttribute("aria-pressed", x === b)); apply(); });
+$("#q").addEventListener("input", (ev) => { q = ev.target.value.trim().toLowerCase(); apply(); });
+$$(".vt button").forEach((b) => b.addEventListener("click", () => { view = b.dataset.v; $$(".vt button").forEach((x) => x.setAttribute("aria-pressed", x === b)); $("#rows").classList.toggle("hidden", view !== "list"); $("#cards").classList.toggle("hidden", view !== "grid"); apply(); }));
+$("#reset").addEventListener("click", () => { cat = "all"; q = ""; $("#q").value = ""; $$("#filters button").forEach((x) => x.setAttribute("aria-pressed", x.dataset.cat === "all")); apply(); });
+apply();
+
+/* case-study drawer with deep links (#p/<id>) */
+const drawer = $("#drawer"), scrim = $("#scrim"), body = $("#dbody");
+$("#dprev").innerHTML = dd("left"); $("#dnext").innerHTML = dd("right"); $("#dclose").innerHTML = dd("close");
+let curId = null, lastFocus = null;
+const visible = () => P.filter((p) => !$(`#rows [data-id="${p.id}"]`).classList.contains("hidden"));
+function openP(id, push = true) {
+  const p = P.find((x) => x.id === id); if (!p) return;
+  if (!curId) lastFocus = document.activeElement;
+  curId = id; const list = visible().length ? visible() : P, i = list.findIndex((x) => x.id === id);
+  $("#dpos").textContent = `${String(P.indexOf(p) + 1).padStart(2, "0")} / ${String(P.length).padStart(2, "0")} · case study`;
+  body.innerHTML = `
+    <div><div class="top3"><span class="cap">${e(p.cat.map((c) => catName[c]).join(" · "))}</span>${p.badge ? `<em class="badge ${p.badge[0]}" style="font-style:normal">${p.badge[0] === "win" ? dd("trophy") : ""}${e(p.badge[1])}</em>` : ""}</div>
+      <h2 class="big fit" id="dtitle">${e(p.t)}</h2><p class="sub2">${e(p.sub)}${p.event ? " · " + e(p.event) : ""}</p><p class="lede">${e(p.lede)}</p></div>
+    ${p.kpi ? `<div><h4 class="cap">Results</h4><div class="kp">${p.kpi.map(([v, l]) => `<div><b>${e(v)}</b><span>${e(l)}</span></div>`).join("")}</div></div>` : ""}
+    ${p.problem ? `<div><h4 class="cap">Problem</h4><p class="prob">${e(p.problem)}</p></div>` : ""}
+    ${p.approach ? `<div><h4 class="cap">What I built</h4><ol class="ap">${p.approach.map((x) => `<li>${e(x)}</li>`).join("")}</ol></div>` : ""}
+    ${p.pipe ? `<div><h4 class="cap">Pipeline</h4><div class="pipe" id="dpipe">${p.pipe.map((x) => `<span>${e(x)}</span>`).join("<i>→</i>")}</div></div>` : ""}
+    ${p.stack ? `<div><h4 class="cap">Stack</h4><div class="chips">${p.stack.map((x) => `<span>${e(x)}</span>`).join("")}</div></div>` : ""}
+    <div class="go">${p.gh ? `<a class="btn" href="${p.gh}" target="_blank" rel="noopener">Source ${dd("git")}</a>` : `<span class="none">Repo link coming soon</span>`}${p.live ? `<a class="btn hot" href="${p.live}" target="_blank" rel="noopener">Live ${dd("arrow")}</a>` : ""}</div>`;
+  drawer.classList.add("on"); scrim.classList.add("on"); drawer.setAttribute("aria-hidden", "false"); drawer.inert = false; document.body.style.overflow = "hidden";
+  body.scrollTop = 0; requestAnimationFrame(() => { HG.fit(); drawer.focus({ preventScroll: true }); });
+  $$("#dpipe span").forEach((s, j) => setTimeout(() => s.classList.add("lit"), RM ? 0 : 350 + j * 160));
+  if (window.gsap && !RM) gsap.from(body.children, { y: 24, opacity: 0, stagger: .05, duration: .6, ease: "expo.out", delay: .15 });
+  $("#dprev").onclick = () => openP(list[(i - 1 + list.length) % list.length].id); $("#dnext").onclick = () => openP(list[(i + 1) % list.length].id);
+  if (push) history.replaceState(null, "", "#p/" + id);
+}
+function closeP() { if (!curId) return; curId = null; drawer.classList.remove("on"); scrim.classList.remove("on"); drawer.setAttribute("aria-hidden", "true"); drawer.inert = true; document.body.style.overflow = ""; history.replaceState(null, "", location.pathname + location.search); if (lastFocus) lastFocus.focus({ preventScroll: true }); }
+document.addEventListener("click", (ev) => { const t = ev.target.closest("[data-id], [data-open]"); if (t && !t.closest("#drawer")) openP(t.dataset.id || t.dataset.open); });
+$("#dclose").onclick = closeP; scrim.onclick = closeP;
+addEventListener("keydown", (ev) => { if (!curId) return; if (ev.key === "Escape") closeP(); if (ev.key === "ArrowRight") $("#dnext").click(); if (ev.key === "ArrowLeft") $("#dprev").click();
+  if (ev.key === "Tab") { const f = $$("#drawer button, #drawer a"); if (!f.length) return; if (ev.shiftKey && document.activeElement === f[0]) { ev.preventDefault(); f[f.length - 1].focus(); } else if (!ev.shiftKey && document.activeElement === f[f.length - 1]) { ev.preventDefault(); f[0].focus(); } } });
+const m = location.hash.match(/^#p\/(\w+)/); if (m) openP(m[1], false);
+
+/* featured flow walks; motion */
+const fl = $$("#flow2 div"); let fi = 0;
+const step = () => { fl.forEach((d, j) => d.classList.toggle("lit", j <= fi)); fi = (fi + 1) % (fl.length + 2); };
+if (RM) fl.forEach((d) => d.classList.add("lit")); else { step(); setInterval(step, 600); }
+(document.fonts ? document.fonts.ready : Promise.resolve()).then(HG.fit); addEventListener("resize", HG.fit);
+HG.magnet($$(".btn, .ib"));
+if (window.gsap && !RM) {
+  gsap.registerPlugin(ScrollTrigger, SplitText);
+  document.fonts.ready.then(() => {
+    SplitText.create(".phero h1", { type: "lines", mask: "lines", onSplit: (s) => gsap.from(s.lines, { yPercent: 110, stagger: .12, duration: 1.2, ease: "expo.out" }) });
+    gsap.from(".phero .sub, .phero .lbl", { y: 20, opacity: 0, duration: 1, delay: .4, ease: "expo.out" });
+    $$(".stats b[data-n]").forEach((b) => { const o = { v: 0 }, n = +b.dataset.n; gsap.to(o, { v: n, duration: 1.4, delay: .5, ease: "power3.out", onUpdate: () => (b.textContent = Math.round(o.v)) }); });
+    gsap.from(".stats > div", { y: 30, opacity: 0, stagger: .08, duration: .9, delay: .45, ease: "expo.out" });
+    gsap.from(".feature", { y: 80, opacity: 0, duration: 1.1, ease: "expo.out", scrollTrigger: { trigger: ".feature", start: "top 88%" } });
+    gsap.from(".feature .kp div", { y: 20, opacity: 0, stagger: .07, duration: .7, ease: "expo.out", scrollTrigger: { trigger: ".feature", start: "top 70%" } });
+  });
+}
+</script>
+</body>
+</html>

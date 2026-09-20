@@ -1,16 +1,15 @@
-# React + Vite
+# project.harshgiri.site
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Every project Harsh Giri has shipped — filterable index, grid, and deep-linkable case studies (`#p/<id>`).
 
-Currently, two official plugins are available:
+Built on the shared harshgiri design system, whose single source is
+[harshgiri-site/ds](https://github.com/giri-harsh/harshgiri-site/tree/main/ds), published at `https://harshgiri.site/ds/v1/`.
+The build pulls it (tokens, fonts, icons, chrome) from there, so all three sites stay one system.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+npm ci
+npm run dev                                          # build + serve → http://localhost:5171
+DS_URL=http://localhost:5170/ds/v1 npm run dev       # against a local harshgiri-site
+```
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Content lives in `src/projects.js`; the page is `src/index.html`.
