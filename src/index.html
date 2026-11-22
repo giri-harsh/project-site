@@ -151,8 +151,8 @@ const { dd, esc: e, $, $$ } = HG, C = window.CONTENT, P = window.PROJECTS, RM = 
 const HOME = C.sites.home;
 HG.chrome({ nav: [["Home", HOME], ["Projects", "#"], ["Résumé", C.sites.resume], ["Contact", HOME + "/#contact"]], active: "Projects", email: C.email });
 
-const live = P.filter((p) => p.live).length, fin = P.filter((p) => p.badge && p.badge[1] === "Finalist").length;
-const erag = P[0];
+const live = P.filter((p) => p.live).length, fin = P.filter((p) => p.badge && ["Finalist", "1st Place"].includes(p.badge[1])).length;
+const feat = P[0];
 const catName = Object.fromEntries(CATS);
 
 $("#app").innerHTML = `
@@ -172,13 +172,13 @@ $("#app").innerHTML = `
   <div class="glow"></div>
   <div>
     <span class="cap k">Featured · flagship system</span>
-    <h2 class="big fit">${e(erag.t)}</h2>
-    <p>${e(erag.lede)}</p>
-    <div class="go"><button class="btn hot" type="button" data-open="erag">Read the case study ${dd("arrow")}</button><a class="btn" href="${erag.gh}" target="_blank" rel="noopener">Source ${dd("git")}</a></div>
+    <h2 class="big fit">${e(feat.t)}</h2>
+    <p>${e(feat.lede)}</p>
+    <div class="go"><button class="btn hot" type="button" data-open="${feat.id}">Read the case study ${dd("arrow")}</button><a class="btn" href="${feat.gh}" target="_blank" rel="noopener">Source ${dd("git")}</a>${feat.live ? `<a class="btn" href="${feat.live}" target="_blank" rel="noopener">Live ${dd("arrow")}</a>` : ""}</div>
   </div>
   <div>
-    <div class="kp">${erag.kpi.map(([v, l]) => `<div><b>${e(v)}</b><span>${e(l)}</span></div>`).join("")}</div>
-    <div class="flow2" id="flow2">${erag.pipe.map((x, i) => `<div><b>0${i + 1}</b>${e(x)}</div>`).join("")}</div>
+    <div class="kp">${feat.kpi.map(([v, l]) => `<div><b>${e(v)}</b><span>${e(l)}</span></div>`).join("")}</div>
+    <div class="flow2" id="flow2">${feat.pipe.map((x, i) => `<div><b>0${i + 1}</b>${e(x)}</div>`).join("")}</div>
   </div>
 </section>
 
